@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var concat = require('gulp-concat');
 
 gulp.task('styles', function () {
     gulp.src('app/Resources/assets/sass/**/*.scss')
@@ -13,6 +14,7 @@ gulp.task('scripts', function () {
         'node_modules/materialize-css/dist/js/materialize.min.js',
         'app/Resources/assets/js/**/*.js'
     ])
+        .pipe(concat('all.js'))
         .pipe(gulp.dest('web/js'));
 });
 

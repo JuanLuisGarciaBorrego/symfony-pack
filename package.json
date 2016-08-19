@@ -5,6 +5,7 @@
   "author": "Juan Luis García Borrego",
   "license": "MIT",
   "dependencies": {
+    "gulp-concat": "^2.6.0",
     "jquery": "^2.1.0",
     "materialize-css": "^0.97.7"
   },
