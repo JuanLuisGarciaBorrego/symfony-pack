@@ -11,6 +11,11 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('web/css'));
 });
 
+gulp.task('fonts', function () {
+    gulp.src('node_modules/materialize-css/dist/fonts/**/*.*')
+        .pipe(gulp.dest('web/fonts'));
+});
+
 gulp.task('scripts', function () {
 
     browserify('app/Resources/assets/js/app.js')
@@ -28,4 +33,4 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('web/js'));
 });
 
-gulp.task('default', ['styles', 'scripts']);
+gulp.task('default', ['styles', 'fonts', 'scripts']);
