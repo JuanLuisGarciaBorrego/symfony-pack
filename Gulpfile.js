@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var browserify = require('browserify');
 var babel = require('babelify');
 var source = require('vinyl-source-stream');
+var imagemin = require('gulp-imagemin');
 
 gulp.task('styles', function () {
     gulp.src('app/Resources/assets/sass/**/*.scss')
@@ -13,6 +14,7 @@ gulp.task('styles', function () {
 
 gulp.task('images', function () {
     gulp.src('app/Resources/assets/img/**/*.*')
+        .pipe(imagemin())
         .pipe(gulp.dest('web/img'));
 });
 
