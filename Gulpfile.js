@@ -6,23 +6,27 @@ var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
 var uglify = require('gulp-uglifyjs');
+var gutil = require('gulp-util');
+
+var global = {
+    assetsDirectory: 'app/Resources/assets',
+    sassFiles: 'sass/**/*.scss',
+    jsFiles: 'js/**/*.js',
+    imgFiles: 'img/**/*.*',
+    prod: gutil.env.prod
+};
 
 gulp.task('styles', function () {
-    gulp.src('app/Resources/assets/sass/**/*.scss')
-        .pipe(sourcemaps.init())
+    gulp.src(global.assetsDirectory + '/' + global.sassFiles)
+        .pipe(!global.prod ? sourcemaps.init() : gutil.noop())
         .pipe(sass())
         .pipe(minifyCSS())
-        .pipe(sourcemaps.write())
+        .pipe(!global.prod ? sourcemaps.write() : gutil.noop())
         .pipe(gulp.dest('web/css'));
 });
 
-gulp.task('watch', function () {
-    gulp.watch('app/Resources/assets/sass/**/*.scss', ['styles']);
-    gulp.watch('app/Resources/assets/js/**/*.js', ['scripts']);
-});
-
 gulp.task('images', function () {
-    gulp.src('app/Resources/assets/img/**/*.*')
+    gulp.src(global.assetsDirectory + '/' + global.imgFiles)
         .pipe(imagemin())
         .pipe(gulp.dest('web/img'));
 });
@@ -37,11 +41,16 @@ gulp.task('scripts', function () {
     gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/materialize-css/dist/js/materialize.min.js',
-        'app/Resources/assets/js/**/*.js'
+        global.assetsDirectory + '/' + global.jsFiles
     ])
         .pipe(concat('all.js'))
         .pipe(uglify())
         .pipe(gulp.dest('web/js'));
+});
+
+gulp.task('watch', function () {
+    gulp.watch(global.assetsDirectory + '/' + global.sassFiles, ['styles']);
+    gulp.watch(global.assetsDirectory + '/' + global.jsFiles, ['scripts']);
 });
 
 gulp.task('default', ['styles', 'fonts', 'images', 'scripts']);
