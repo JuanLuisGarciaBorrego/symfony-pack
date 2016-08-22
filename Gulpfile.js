@@ -11,6 +11,11 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('web/css'));
 });
 
+gulp.task('images', function () {
+    gulp.src('app/Resources/assets/img/**/*.*')
+        .pipe(gulp.dest('web/img'));
+});
+
 gulp.task('fonts', function () {
     gulp.src('node_modules/materialize-css/dist/fonts/**/*.*')
         .pipe(gulp.dest('web/fonts'));
@@ -33,4 +38,4 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('web/js'));
 });
 
-gulp.task('default', ['styles', 'fonts', 'scripts']);
+gulp.task('default', ['styles', 'fonts', 'images', 'scripts']);
