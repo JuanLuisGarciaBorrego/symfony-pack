@@ -18,6 +18,10 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('web/css'));
 });
 
+gulp.task('watch', function () {
+    gulp.watch('app/Resources/assets/sass/**/*.scss', ['styles']);
+});
+
 gulp.task('images', function () {
     gulp.src('app/Resources/assets/img/**/*.*')
         .pipe(imagemin())
