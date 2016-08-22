@@ -7,6 +7,7 @@ var source = require('vinyl-source-stream');
 var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
+var uglify = require('gulp-uglifyjs');
 
 gulp.task('styles', function () {
     gulp.src('app/Resources/assets/sass/**/*.scss')
@@ -42,6 +43,7 @@ gulp.task('scripts', function () {
         'app/Resources/assets/js/init-template.js'
     ])
         .pipe(concat('all.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('web/js'));
 });
 
