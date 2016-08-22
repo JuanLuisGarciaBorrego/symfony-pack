@@ -5,10 +5,15 @@ var browserify = require('browserify');
 var babel = require('babelify');
 var source = require('vinyl-source-stream');
 var imagemin = require('gulp-imagemin');
+var sourcemaps = require('gulp-sourcemaps');
+var minifyCSS = require('gulp-minify-css');
 
 gulp.task('styles', function () {
     gulp.src('app/Resources/assets/sass/**/*.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass())
+        .pipe(minifyCSS())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('web/css'));
 });
 
