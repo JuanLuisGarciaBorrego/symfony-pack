@@ -49,8 +49,7 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(global.assetsDirectory + '/' + global.sassFiles, ['styles']);
-    gulp.watch(global.assetsDirectory + '/' + global.jsFiles, ['scripts']);
+    gulp.watch(global.assetsDirectory + '/**/*.*', ['styles', 'images', 'scripts']);
 });
 
 gulp.task('default', ['styles', 'fonts', 'images', 'scripts']);
