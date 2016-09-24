@@ -9,7 +9,7 @@ var uglify = require('gulp-uglifyjs');
 var gutil = require('gulp-util');
 
 var global = {
-    assetsDirectory: 'app/Resources/assets',
+    assetsDirectory: 'app/Resources/public',
     sassFiles: 'sass/**/*.scss',
     jsFiles: 'js/**/*.js',
     imgFiles: 'img/**/*.*',
