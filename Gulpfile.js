@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var concat = require('gulp-concat');
 var source = require('vinyl-source-stream');
 var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
@@ -43,8 +42,7 @@ gulp.task('scripts', function () {
         'node_modules/materialize-css/dist/js/materialize.min.js',
         global.assetsDirectory + '/' + global.jsFiles
     ])
-        .pipe(concat('all.js'))
-        .pipe(uglify())
+        .pipe(uglify('all.js'))
         .pipe(gulp.dest('web/js'));
 });
 
