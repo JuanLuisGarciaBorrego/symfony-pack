@@ -5,8 +5,6 @@
   "author": "Juan Luis García Borrego",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^2.1.0",
-    "materialize-css": "^0.97.7"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -17,6 +15,8 @@
     "gulp-uglifyjs": "^0.6.2",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.9",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "jquery": "^2.1.0",
+    "materialize-css": "^0.97.7"
   }
 }
