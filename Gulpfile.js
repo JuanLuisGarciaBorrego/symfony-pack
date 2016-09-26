@@ -11,10 +11,19 @@ var global = {
     sassFiles: 'sass/**/*.scss',
     jsFiles: 'js/**/*.js',
     imgFiles: 'img/**/*.*',
-    prod: gutil.env.prod
+    prod: gutil.env.prod,
+    statusMessage: gutil.env.prod ? ' producción' : ' desarrollo'
 };
 
+gulp.task('status', function () {
+    gutil.log(gutil.colors.yellow('Gulp en modo' + global.statusMessage));
+    gutil.log(gutil.colors.blue('Para activar Gulp en producción: gulp --prod'));
+});
+
 gulp.task('styles', function () {
+    gutil.log(gutil.colors.red('Procesando y minificando archivos sass.'));
+    !global.prod ? gutil.log(gutil.colors.blue('Source maps activado')) : gutil.noop();
+
     gulp.src(global.assetsDirectory + '/' + global.sassFiles)
         .pipe(!global.prod ? sourcemaps.init() : gutil.noop())
         .pipe(sass())
@@ -24,19 +33,24 @@ gulp.task('styles', function () {
 });
 
 gulp.task('images', function () {
-    gulp.src(global.assetsDirectory + '/' + global.imgFiles)
+    gutil.log(gutil.colors.red('Copiado de imágenes web/img aplicando una reducción de peso'));
+
+    return gulp.src(global.assetsDirectory + '/' + global.imgFiles)
         .pipe(imagemin())
         .pipe(gulp.dest('web/img'));
 });
 
 gulp.task('fonts', function () {
-    gulp.src('node_modules/materialize-css/dist/fonts/**/*.*')
+    gutil.log(gutil.colors.red('Copiando fonts de materialize-css a web/fonts'));
+
+    return gulp.src('node_modules/materialize-css/dist/fonts/**/*.*')
         .pipe(gulp.dest('web/fonts'));
 });
 
 gulp.task('scripts', function () {
+    gutil.log(gutil.colors.red('Uniendo y minificando todos los archivos JavaScripts'));
 
-    gulp.src([
+    return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/materialize-css/dist/js/materialize.min.js',
         global.assetsDirectory + '/' + global.jsFiles
@@ -46,7 +60,9 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(global.assetsDirectory + '/**/*.*', ['styles', 'images', 'scripts']);
+    gutil.log(gutil.colors.cyan('Uniendo y minificando todos los archivos JavaScripts'));
+
+    return gulp.watch(global.assetsDirectory + '/**/*.*', ['styles', 'images', 'scripts']);
 });
 
-gulp.task('default', ['styles', 'fonts', 'images', 'scripts']);
+gulp.task('default', ['status', 'styles', 'fonts', 'images', 'scripts']);
