@@ -16,7 +16,8 @@ var global = {
 };
 
 gulp.task('status', function () {
-    gutil.log(gutil.colors.yellow('Gulp en modo' + gutil.env.prod ? ' producción' : ' desarrollo'));
+    gutil.log(gutil.colors.blue('Gulp en modo: '));
+    gutil.log(gutil.colors.yellow(gutil.env.prod ? 'Producción' : 'Desarrollo'));
     gutil.log(gutil.colors.blue('Para activar Gulp en producción: gulp --prod'));
 });
 
