@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
-var minifyCSS = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglifyjs');
 var gutil = require('gulp-util');
 
@@ -16,7 +16,7 @@ var global = {
 };
 
 gulp.task('status', function () {
-    gutil.log(gutil.colors.yellow('Gulp en modo' + global.statusMessage));
+    gutil.log(gutil.colors.yellow('Gulp en modo' + gutil.env.prod ? ' producción' : ' desarrollo'));
     gutil.log(gutil.colors.blue('Para activar Gulp en producción: gulp --prod'));
 });
 
@@ -27,7 +27,7 @@ gulp.task('styles', function () {
     gulp.src(global.assetsDirectory + '/' + global.sassFiles)
         .pipe(!global.prod ? sourcemaps.init() : gutil.noop())
         .pipe(sass())
-        .pipe(minifyCSS())
+        .pipe(cleanCSS())
         .pipe(!global.prod ? sourcemaps.write() : gutil.noop())
         .pipe(gulp.dest('web/css'));
 });
