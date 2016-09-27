@@ -5,6 +5,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglifyjs');
 var gutil = require('gulp-util');
+var phpunit = require('gulp-phpunit');
 
 var global = {
     assetsDirectory: 'app/Resources/public',
@@ -64,6 +65,13 @@ gulp.task('watch', function () {
     gutil.log(gutil.colors.cyan('Uniendo y minificando todos los archivos JavaScripts'));
 
     return gulp.watch(global.assetsDirectory + '/**/*.*', ['styles', 'images', 'scripts']);
+});
+
+
+gulp.task('phpunit', function() {
+    gutil.log(gutil.colors.cyan('Ejecutando PHPUnit'));
+    gulp.src('')
+        .pipe(phpunit('phpunit'));
 });
 
 gulp.task('default', ['status', 'styles', 'fonts', 'images', 'scripts']);
